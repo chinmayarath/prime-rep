@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="com.bookmarker.db.model.BookMark" table="bookmark" >
+        <id name="bookmarkID" type="java.lang.Long" column="BOOKMARK_ID">
+            <generator class="identity" />
+        </id>
+        <property name="bookMarkTitle" type="string" column="BOOKMARK_TITLE" unique="true" not-null= "true"/>
+        <property name="bookMarkURL" type="string" column="BOOKMARK_URL" unique="true" not-null= "true"/>
+        <property name="bookMarkNote" type="string" column="BOOKMARK_NOTE"/>
+        
+        <set name = "tags" table= "bookmark_tag" cascade="save-update">
+        	<key column= "BOOKMARK_ID"/>
+        	<many-to-many column="TAG_ID" class="com.bookmarker.db.model.Tag"/>
+        </set>
+        
+    </class>
+</hibernate-mapping>

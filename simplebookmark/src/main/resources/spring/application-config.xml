@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    
+  	<context:annotation-config></context:annotation-config>
+
+<context:component-scan base-package="com.bookmark.controller"></context:component-scan>
+<context:component-scan base-package="com.bookmark.validator"></context:component-scan>
+<context:component-scan base-package="com.bookmark.db.dao"></context:component-scan>
+
+
+<context:property-placeholder location="classpath:config.properties"></context:property-placeholder>
+
+<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"  p:basename="Messages"/>
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
+ p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}" p:username="${jdbc.username}" p:password="${jdbc.password}">
+</bean> 
+
+<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+ <property name="dataSource" ref="dataSource"></property>
+ <property name="hibernateProperties">
+  <props>       
+  <prop key="hibernate.dialect">${hibernate.dialect}</prop>         
+  <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+  </props>
+ </property>
+ <property name="configLocation">
+            <value>classpath:hibernate.cfg.xml</value>
+ </property>
+</bean>
+
+<!-- 
+<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" 
+  p:sessionfactory-ref="sessionFactory">
+</bean>
+
+ <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven> -->
+
+</beans>
