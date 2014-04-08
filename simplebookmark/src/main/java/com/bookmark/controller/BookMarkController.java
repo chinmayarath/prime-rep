@@ -29,8 +29,9 @@ import com.bookmarker.db.model.BookMark;
  * 	<li>/deleteBookMark - to delete a bookmark</li>
  * </UL>
  * @author Chinmay
- *
+ * Added some comment
  */
+ 
 @Controller
 public class BookMarkController
 {
