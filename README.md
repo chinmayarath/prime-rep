@@ -1,8 +1,4 @@
-testrepo
+Prime repo
 ========
 
-it is a test repo
 
-hey this can also be modified 
-
-cooolllll
